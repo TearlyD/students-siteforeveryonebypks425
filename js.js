@@ -1,14 +1,9 @@
-/* ==========================================================
-   СтудSpace — логика приложения
-   Аккаунты, посты, лайки, комментарии, рейтинг
-   ========================================================== */
 const $ = id => document.getElementById(id);
 
 const STORAGE_USERS   = "studentSpaceUsers";
 const STORAGE_POSTS   = "studentSpacePosts";
 const STORAGE_CURRENT = "studentSpaceCurrent";
 
-/* Безопасное чтение из localStorage */
 const load = (key, fallback) => {
   try {
     const raw = localStorage.getItem(key);
@@ -18,7 +13,6 @@ const load = (key, fallback) => {
   }
 };
 
-/* Универсальный генератор id (randomUUID есть не везде, например на file://) */
 const uid = () =>
   (window.crypto && typeof crypto.randomUUID === "function")
     ? crypto.randomUUID()
@@ -28,7 +22,6 @@ let users   = load(STORAGE_USERS, []);
 let posts   = load(STORAGE_POSTS, []);
 let current = load(STORAGE_CURRENT, null);
 
-/* Если сохранённый аккаунт «потерялся» — сбрасываем сессию */
 if (current && !users.some(u => u.id === current.id)) current = null;
 
 const save = () => {
@@ -44,7 +37,6 @@ const fmtDate = ts => new Date(ts).toLocaleString("ru-RU", {
   day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
 });
 
-/* Сообщение в панели аккаунта */
 function setMessage(text, isError) {
   const el = $("accountMessage");
   if (!el) return;
@@ -52,7 +44,6 @@ function setMessage(text, isError) {
   el.classList.toggle("msg-error", !!isError);
 }
 
-/* Аватар: картинка по ссылке или инициалы */
 function avatar(el, user) {
   el.innerHTML = "";
   if (user && user.avatar) {
@@ -66,7 +57,6 @@ function avatar(el, user) {
   }
 }
 
-/* ---------------- Профиль ---------------- */
 function renderProfile() {
   const name = current?.name || "Гость";
   $("sideName").textContent = name;
@@ -78,7 +68,6 @@ function renderProfile() {
   $("postCount").textContent = myPosts.length;
   $("likeCount").textContent = myPosts.reduce((n, p) => n + (p.likes?.length || 0), 0);
 
-  /* Не затираем то, что человек печатает прямо сейчас */
   if (document.activeElement !== $("username"))  $("username").value  = current?.name   || "";
   if (document.activeElement !== $("group"))     $("group").value     = current?.group  || "";
   if (document.activeElement !== $("avatarUrl")) $("avatarUrl").value = current?.avatar || "";
@@ -91,7 +80,6 @@ function renderProfile() {
   );
 }
 
-/* ---------------- Лента ---------------- */
 function renderPosts() {
   const host = $("posts");
   host.innerHTML = "";
@@ -102,7 +90,6 @@ function renderPosts() {
   }
 
   [...posts].sort((a, b) => b.createdAt - a.createdAt).forEach(post => {
-    /* совместимость со старыми данными */
     if (!Array.isArray(post.likes))    post.likes = [];
     if (!Array.isArray(post.comments)) post.comments = [];
 
