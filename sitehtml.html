@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Студенты ПК МУКР</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">S</span><span>студ<span>space</span></span></a>
+    <div class="college">ПК МУКР <span>·</span> ПКС 4-25</div>
+    <button class="avatar small" id="headerAvatar" aria-label="Профиль">?</button>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="profile-card">
+        <div class="cover"></div>
+        <div class="profile-info">
+          <div class="avatar profile-avatar" id="sideAvatar">?</div>
+          <h3 id="sideName">Гость</h3>
+          <p id="sideGroup">Студент ПК МУКР</p>
+          <div class="profile-stats"><span><b id="postCount">0</b> постов</span><span><b id="likeCount">0</b> лайков</span></div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="active" href="#feed">⌂ <span>Лента</span></a>
+        <a href="#create">＋ <span>Создать пост</span></a>
+        <a href="#rating">★ <span>Рейтинг студентов</span></a>
+      </nav>
+      <div class="side-note">Пространство студентов<br><b>ПК МУКР</b></div>
+    </aside>
+
+    <section class="content">
+      <section class="welcome">
+        <div><p class="eyebrow">СООБЩЕСТВО КОЛЛЕДЖА</p><h1>Всё студенческое —<br><span>в одном месте.</span></h1><p class="muted">Делись новостями, находи друзей и поддерживай одногруппников.</p></div>
+        <div class="welcome-art">✦</div>
+      </section>
+
+      <section class="composer card" id="create">
+        <div class="section-heading"><h2>Создать публикацию</h2><span class="muted">Что нового?</span></div>
+        <textarea id="postText" placeholder="Расскажи, что происходит в колледже..."></textarea>
+        <div class="composer-bottom"><span class="muted tiny">Будь дружелюбен — это пространство нашего колледжа</span><button class="primary" id="publishBtn">Опубликовать ↗</button></div>
+      </section>
+
+      <section id="feed" class="feed-section">
+        <div class="section-heading"><h2>Лента</h2><span class="pill">ПКС 4-25</span></div>
+        <div id="posts"></div>
+      </section>
+    </section>
+
+    <aside class="rightbar">
+      <section class="card account-card" id="accountPanel">
+        <h2>Твой аккаунт</h2>
+        <p class="muted tiny">Войди или создай профиль, чтобы публиковать посты и комментировать.</p>
+        <input id="username" placeholder="Твоё имя">
+        <input id="group" placeholder="Группа, например ПКС 4-25">
+        <input id="avatarUrl" placeholder="Ссылка на аватар (необязательно)">
+        <input id="password" type="password" placeholder="Пароль (минимум 4 символа)">
+        <div class="account-actions"><button class="primary full" id="loginBtn">Войти / Регистрация</button><button class="ghost full" id="logoutBtn">Выйти</button></div>
+        <p class="tiny muted" id="accountMessage">Данные демо-аккаунта сохраняются только в этом браузере.</p>
+      </section>
+
+      <section class="card rating-card" id="rating">
+        <div class="section-heading"><h2>Активные студенты</h2><span class="star">★</span></div>
+        <p class="muted tiny">Рейтинг по лайкам к публикациям</p>
+        <div id="leaderboard"></div>
+      </section>
+      <div class="quote">«Большие идеи начинаются<br>с маленького общения».</div>
+    </aside>
+  </main>
+  <footer>© 2026 СтудSpace · Учебный проект ПКС 4-25</footer>
+  <script src="js.js"></script>
+</body>
+</html>
